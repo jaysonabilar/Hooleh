@@ -1,3 +1,30 @@
 page-login {
 
 }
+
+.loginbg {
+    background-image: url('../../assets/img/hooleh%20login%20bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logoContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.hoolehlogo {
+    height: 120px;
+    width: 120px;
+    margin-left: 80px;
+}
+
+.loginUsername {
+    opacity: 0.8;
+}
+
+.loginPassword {
+    padding-bottom: 5px;
+    margin-right: 5px;
+    opacity: 0.8;
+}
