@@ -3,6 +3,9 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TicketPage } from '../pages/ticket/ticket';
+import { LoginPage } from '../pages/login/login';
+import { ModalviolatorPage } from '../pages/modalviolator/modalviolator';
+import { ViolationsPage} from '../pages/violations/violations';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -11,7 +14,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     HomePage,
-    TicketPage
+    TicketPage,
+    LoginPage,
+    ModalviolatorPage,
+    ViolationsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,7 +26,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HomePage,
-    TicketPage
+    TicketPage,
+    LoginPage,
+    ModalviolatorPage,
+    ViolationsPage
 
   ],
   providers: [

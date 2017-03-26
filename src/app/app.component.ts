@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { TicketPage } from '../pages/ticket/ticket';
+import { LoginPage } from '../pages/login/login';
+import { ViolationsPage } from '../pages/violations/violations'
 
 
 @Component({
@@ -13,7 +15,7 @@ import { TicketPage } from '../pages/ticket/ticket';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = TicketPage;
 
   pages: Array<{title: string, component: any}>;
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { ModalviolatorPage } from '../modalviolator/modalviolator';
+import { TicketPage } from '../ticket/ticket';
 /*
   Generated class for the Home page.
 
@@ -18,5 +19,13 @@ export class HomePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
-
+  
+    presentModal() {
+    this.navCtrl.push(ModalviolatorPage);
+  }
+  
+  presentTicket() {
+    this.navCtrl.push(TicketPage);
+  }
+  
 }

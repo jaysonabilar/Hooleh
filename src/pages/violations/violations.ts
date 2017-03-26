@@ -2,21 +2,21 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 /*
-  Generated class for the Ticket page.
+  Generated class for the Violations page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-ticket',
-  templateUrl: 'ticket.html'
+  selector: 'page-violations',
+  templateUrl: 'violations.html'
 })
-export class TicketPage {
+export class ViolationsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TicketPage');
+    console.log('ionViewDidLoad ViolationsPage');
   }
-}
 
+}
