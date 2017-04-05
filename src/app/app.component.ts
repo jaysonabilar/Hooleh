@@ -7,7 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { TicketPage } from '../pages/ticket/ticket';
 import { LoginPage } from '../pages/login/login';
 import { ViolationsPage } from '../pages/violations/violations'
-
+import { ModalViolatorPage } from '../pages/modalviolator/modalviolator'
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +15,7 @@ import { ViolationsPage } from '../pages/violations/violations'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = TicketPage;
+  rootPage: any = modalViolator;
 
   pages: Array<{title: string, component: any}>;
 
