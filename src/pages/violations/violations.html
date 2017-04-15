@@ -13,77 +13,13 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
     <ion-list>
-        <ion-item>
+        <ion-item *ngFor="let violationsDetails of violationsObject" text-wrap>
             <ion-label>
-                <h3>ALLOWING ANOTHER PERSON<br>
-                    TO USE DRIVERS LICENSE</h3>
-                <h4>500.00php</h4>
-                <p>Code 060</p>
-            </ion-label>
-            <ion-checkbox color="secondary" checked="false"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-            <ion-label>
-                <h3>ALLOWING ANOTHER TO USE<br>
-                    COMML / BUSS. NAME</h3>
-                <h4>375.00php</h4>
-                <p>Code 114</p>
-            </ion-label>
-            <ion-checkbox color="secondary" checked="false"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-            <ion-label>
-                <h3>ALLOWING IMPROPERLY LIC /<br>
-                     UNLIC PERSON TO DRIVE</h3>
-                <h4>750.00php</h4>
-                <p>Code 061</p>
-            </ion-label>
-            <ion-checkbox color="secondary" checked="false"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-            <ion-label>
-                <h3>ALLOWING PASSENGER ON TOP <br>
-                    OF VEHICLE</h3>
-                <h4>150.00php</h4>
-                <p>Code 046</p>
-            </ion-label>
-            <ion-checkbox color="secondary" checked="false"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-            <ion-label>
-                <h3>**ARROGANCE / DISCOURTESY <br>
-                    (w/ seminar)</h3>
-                <h4>150.00php</h4>
-                <p>Code 048</p>
-            </ion-label>
-            <ion-checkbox color="secondary" checked="false"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-            <ion-label>
-                <h3>BAN ON RIGHT-HAND DRIVE MV<br>
-                    </h3>
-                <h4>500.00php</h4>
-                <p>Code 170</p>
-            </ion-label>
-            <ion-checkbox color="secondary" checked="false"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-            <ion-label>
-                <h3>BREACH OF FRANCHISE<br>
-                    CONDITIONS</h3>
-                <h4>375.00php</h4>
-                <p>Code 074</p>
-            </ion-label>
-            <ion-checkbox color="secondary" checked="false"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-            <ion-label>
-                <h3>BROKEN SEALING WIRE<br>
-                    </h3>
-                <h4>149.00php</h4>
-                <p>Code 149</p>
+                <h3>{{violationsDetails.strViolationDescription}}</h3>
+                <h4>Php {{violationsDetails.dblPrice}}</h4>
+                <p>{{violationsDetails.strViolationCode}}</p>
             </ion-label>
             <ion-checkbox color="secondary" checked="false"></ion-checkbox>
         </ion-item>

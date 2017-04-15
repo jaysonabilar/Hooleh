@@ -6,7 +6,7 @@ import { TicketPage } from '../pages/ticket/ticket';
 import { LoginPage } from '../pages/login/login';
 import { ModalviolatorPage } from '../pages/modalviolator/modalviolator';
 import { ViolationsPage} from '../pages/violations/violations';
-
+import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -34,6 +34,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   providers: [
     StatusBar,
+    Geolocation,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

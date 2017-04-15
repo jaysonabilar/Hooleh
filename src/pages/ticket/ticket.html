@@ -4,58 +4,75 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-   <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Violator's Ticket</ion-title>
   </ion-navbar>
-
 </ion-header>
+
 
 <ion-content>
 <ion-list>
-    <ion-list-header class="violatorsInfo">
-        Violator's Profile
-    </ion-list-header>
-  <ion-item>
-    <ion-icon name="contact" item-left></ion-icon>
-    <ion-input type="text" placeholder="Violator's Name"></ion-input>
-  </ion-item>
   <ion-item>
     <ion-icon name="card" item-left></ion-icon>
     <ion-input type="text" placeholder="License Number"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-icon name="car" item-left></ion-icon>
-    <ion-input type="text" placeholder="Plate Number"></ion-input>
-  </ion-item>
+    <button ion-button block>Check Violator</button>
 </ion-list>
-    <div>
-        <ion-list>
-            <ion-buttons>
-                <button ion-button icon-left color="danger" outline full>
-                    <ion-icon name="add" ></ion-icon>
-                    Add Violation
-                </button>
-            </ion-buttons>
-        </ion-list>
-    </div>
-    
-    <ion-list> 
+
+    <ion-list>
         <ion-list-header>
-            Violation/s
+            Violator's Profile
         </ion-list-header>
         <ion-item>
-            <ion-label>
-                <h3>BROKEN SEALING WIRE<br>
-                    </h3>
-                <h4>149.00php</h4>
-                <p>Code 149</p>
-            </ion-label>
+            <ion-icon name="contact" item-left></ion-icon>
+            <ion-input type="text" placeholder="Last Name"></ion-input>
         </ion-item>
+        <ion-item>
+            <ion-icon name="contact" item-left></ion-icon>
+            <ion-input type="text" placeholder="First Name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="contact" item-left></ion-icon>
+            <ion-input type="text" placeholder="Middle Name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="calendar" item-left></ion-icon>
+            <ion-input type="text" placeholder="Birthday"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="card" item-left></ion-icon>
+            <ion-input type="text" placeholder="License Type"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="card" item-left></ion-icon>
+            <ion-input type="text" placeholder="License Expiration Date"></ion-input>
+        </ion-item>
+            <button ion-button block color="danger" (click)="showListOfViolations()">Add Violations</button>
+    </ion-list>
+    
+    <ion-list>
+          <ion-list-header>
+          Violation/s
+          </ion-list-header>
+          <ion-item>
+            <h2>Beating the red light</h2>
+            <p>430.00</p>
+            <p>Code 70</p>
+          </ion-item>
+    </ion-list>
+    <ion-list>
+          <ion-list-header>
+            Total Fine  
+          </ion-list-header>
+          <ion-item>
+            <p item-right>450.00php</p>
+          </ion-item>
+          <button ion-button block color="secondary">File Ticket</button>
     </ion-list>
 </ion-content>
 

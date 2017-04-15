@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ModalviolatorPage } from '../modalviolator/modalviolator';
 import { TicketPage } from '../ticket/ticket';
+import { Geolocation } from '@ionic-native/geolocation';
+import { ApiService } from '../../providers/api-service';
 /*
   Generated class for the Home page.
 
@@ -10,22 +12,98 @@ import { TicketPage } from '../ticket/ticket';
 */
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [ApiService]
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public lat : any;
+  public long :any;
 
+  loginDetails = {
+    username:'',
+    password:'',
+    token:''
+  };
+
+  loginDetailsObject: any;
+
+  violatorsTodayObject: any;
+
+  violatorsTodayDetails= {
+    intDriverID:'',
+    strDriverLicense:'',
+    strDriverFirstName:'',
+    strDriverLastName:''
+  }
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation : Geolocation, public apiService: ApiService) {
+
+    this.loginDetailsObject = localStorage.getItem('loginDetails');
+
+    this.loginDetails = JSON.parse(this.loginDetailsObject);
+
+    this.listViolatorsToday();
+
+   // this.getEnforcerDetails();
+  }
+
+  listViolatorsToday()
+  {
+     this.apiService.getViolatorsToday(this.loginDetails.token)
+      .then(data => { 
+        this.violatorsTodayObject = data;
+     });
+      console.log(this.violatorsTodayObject);
+    // this.enforcerDetails = JSON.parse(this.enforcerDetailsObject);
+     
+
+    // window.localStorage.setItem('enforcerDetails', JSON.stringify(this.enforcerDetailsObject));
+
+  }
+
+  /*
+  getEnforcerDetails()
+  {
+     this.apiService.getEnforcerDetails(this.loginDetails.token)
+      .then(data => { 
+        this.enforcerDetailsObject = data;
+     });
+      console.log(this.enforcerDetailsObject);
+    // this.enforcerDetails = JSON.parse(this.enforcerDetailsObject);
+     
+
+     window.localStorage.setItem('enforcerDetails', JSON.stringify(this.enforcerDetailsObject));
+
+  }
+  */
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
   
     presentModal() {
-    this.navCtrl.push(ModalviolatorPage);
+     this.geolocation.getCurrentPosition().then(res => {
+     this.lat = res.coords.latitude;
+     this.long = res.coords.longitude;
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+    console.log(this.lat);
+    console.log(this.long);
   }
   
   presentTicket() {
-    this.navCtrl.push(TicketPage);
+
+     this.geolocation.getCurrentPosition().then(res => {
+     this.lat = res.coords.latitude;
+     this.long = res.coords.longitude;
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+    console.log(this.lat);
+    console.log(this.long);
   }
   
 }

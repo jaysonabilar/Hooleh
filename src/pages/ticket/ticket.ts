@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { ViolationsPage} from '../violations/violations';
 /*
   Generated class for the Ticket page.
 
@@ -17,6 +17,11 @@ export class TicketPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TicketPage');
+  }
+
+  showListOfViolations()
+  {
+    this.navCtrl.push(ViolationsPage);
   }
 }
 
