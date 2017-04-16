@@ -158,7 +158,7 @@ export class ApiService {
       let body = new FormData();
       body.append('strDriverLicenseNumber', strDriverLicenseNumber);
       body.append('strRegistrationSticker', strRegistrationSticker);
-      body.append('strControlNumber', '444444');
+      body.append('strControlNumber', '222222');
       body.append('strPlateNumber', strPlateNumber);
       body.append('intVehicleTypeID', intVehicleTypeID);
       body.append('dblLatitude', dblLatitude);
@@ -167,6 +167,33 @@ export class ApiService {
 
     return new Promise(resolve => {
       this.http.post('http://localhost:8000/api/v1/driverviolations', body, options)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.object = data;
+          resolve(this.object);
+        });
+    });
+  } 
+
+  addDriver(token, strDriverLicense, strDriverFirstName, strDriverMiddleName, strDriverLastName,
+                intLicenseType, datLicenseExpiration, datDriverBirthday) {
+
+     let headers = new Headers({
+      'Authorization': 'Bearer ' + token });
+     let options = new RequestOptions({ headers: headers });
+
+      console.log('pota ' + token);
+      let body = new FormData();
+      body.append('strDriverLicense', strDriverLicense);
+      body.append('strDriverFirstName', strDriverFirstName);
+      body.append('strDriverMiddleName', strDriverMiddleName);
+      body.append('strDriverLastName', strDriverLastName);
+      body.append('intLicenseType', intLicenseType);
+      body.append('datLicenseExpiration', datLicenseExpiration);
+      body.append('datDriverBirthday', datDriverBirthday);
+
+    return new Promise(resolve => {
+      this.http.post('http://localhost:8000/api/v1/drivers', body, options)
         .map(res => res.json())
         .subscribe(data => {
           this.object = data;

@@ -132,25 +132,31 @@ export class TicketPage {
   }
 
   fileTicket(dblLongitude, dblLatitude, strDriverLicense, strDriverFirstName,strDriverMiddleName, strDriverLastName, 
-    datDriverBirthday, datLicenseExpiration,intLicenseType, strPlateNumber, strRegistrationSticker, intVehicleTypeID)
+    datDriverBirthday, datLicenseExpiration,intLicenseType, strPlateNumber, strRegistrationSticker, intVehicleTypeID,isExists)
   {
-    console.log(dblLongitude);
-    console.log(dblLongitude);
-    console.log(strDriverLicense);
-    console.log(strDriverFirstName);
-    console.log(strDriverMiddleName);
-    console.log(strDriverLastName);
-    console.log(datDriverBirthday);
-    console.log(datLicenseExpiration);
-    console.log(intLicenseType);
-    console.log(strPlateNumber);
-    console.log(strRegistrationSticker);
-      console.log(intVehicleTypeID);
+    if(isExists == '1')
+    {
       this.apiService.addTicket(this.loginDetails.token, strDriverLicense, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
-            dblLatitude, dblLongitude, this.violationsObject)
-      .then(data => { 
-        this.object= data;
-    });
+              dblLatitude, dblLongitude, this.violationsObject)
+        .then(data => { 
+          this.object= data;
+      });
+    }
+    else
+    {
+      this.apiService.addDriver(this.loginDetails.token, strDriverLicense, strDriverFirstName, strDriverMiddleName, strDriverLastName,
+              intLicenseType, datLicenseExpiration, datDriverBirthday)
+        .then(data => { 
+          this.object= data;
+      });
+
+       this.apiService.addTicket(this.loginDetails.token, strDriverLicense, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
+              dblLatitude, dblLongitude, this.violationsObject)
+        .then(data => { 
+          this.object= data;
+      });
+
+    }
 
       
   }

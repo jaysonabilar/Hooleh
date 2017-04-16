@@ -18,6 +18,7 @@
 <ion-content>
 <input type="hidden" [(ngModel)]="driverDetails.dblLongitude" />
 <input type="hidden" [(ngModel)]="driverDetails.dblLatitude" />
+<input type="hidden" [(ngModel)]="driverDetails.isExists" />
 
 <ion-list>
   <ion-item>
@@ -110,7 +111,7 @@
             <p>{{violationsSelected.strViolationCode}}</p>
           </ion-item>
     </ion-list>
-    <button ion-button block color="secondary" (click)="fileTicket(driverDetails.dblLongitude,driverDetails.dblLatitude,driverDetails.strDriverLicense,driverDetails.strDriverFirstName,driverDetails.strDriverMiddleName,driverDetails.strDriverLastName,driverDetails.datDriverBirthday,driverDetails.datLicenseExpiration,driverDetails.intLicenseType,driverDetails.strPlateNumber,driverDetails.strRegistrationSticker,driverDetails.intVehicleTypeID)">File Ticket</button>
+    <button ion-button block color="secondary" (click)="fileTicket(driverDetails.dblLongitude,driverDetails.dblLatitude,driverDetails.strDriverLicense,driverDetails.strDriverFirstName,driverDetails.strDriverMiddleName,driverDetails.strDriverLastName,driverDetails.datDriverBirthday,driverDetails.datLicenseExpiration,driverDetails.intLicenseType,driverDetails.strPlateNumber,driverDetails.strRegistrationSticker,driverDetails.intVehicleTypeID,driverDetails.isExists)">File Ticket</button>
    
 </ion-content>
 
