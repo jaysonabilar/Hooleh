@@ -18,26 +18,28 @@
     <ion-avatar item-left>
       <img src="../../assets/img/avatar1.png">
     </ion-avatar>
-    <h2>Rafael Versoza</h2>
-    <p>Beating the red light</p>
+    <h2>{{violator.strDriverFirstName}}</h2>
+    <p>{{violator.strDriverLastName}}</p>
   </ion-item>
 
-    <ion-list>
-      <ion-item>
-        <ion-icon name="car" item-left></ion-icon>
-         Plate Number
-        <p item-right>QWE 206</p>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="cash" item-left></ion-icon>
-        Fine
-        <p item-right>1,200</p>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="cash" item-left></ion-icon>
-        <ion-label item-left>Status</ion-label>
-        <p item-right class="statusText" color="secondary">Paid</p>
-      </ion-item>    
+     <ion-list>
+      <ion-list *ngFor="let violationDetails of violationsObject">
+          <ion-item>
+          <ion-icon name="car" item-left></ion-icon>
+            Violation Code
+          <p item-right>{{violationDetails.strViolationCode}}</p>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="cash" item-left></ion-icon>
+            Violation Description
+            <p item-right>{{violationDetails.strViolationDescription}}</p>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="cash" item-left></ion-icon>
+            Violation Price
+            <p item-right>{{violationDetails.dblPrice}}</p>
+          </ion-item>   
+      </ion-list>
     </ion-list>
 </ion-content>
 

@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>Violations</ion-title>
   </ion-navbar>
 
@@ -21,10 +21,10 @@
                 <h4>Php {{violationsDetails.dblPrice}}</h4>
                 <p>{{violationsDetails.strViolationCode}}</p>
             </ion-label>
-            <ion-checkbox color="secondary" checked="false"></ion-checkbox>
+            <ion-checkbox [(ngModel)]="violationsDetails.isChecked" color="secondary" checked="false" (click)="print(violationsDetails)"></ion-checkbox>
         </ion-item>
     </ion-list>
-    <button ion-button icon-left full color="secondary">
+    <button ion-button icon-left full color="secondary" (click)="confirmSelectedViolations()">
       <ion-icon name="add"></ion-icon>
       Add Violation
     </button>

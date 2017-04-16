@@ -23,16 +23,10 @@
   
 <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 <ion-list>
-  <ion-item *ngFor="let item of items">
-    {{ item }}
-  </ion-item>
-</ion-list>
-
-<ion-list>
   <ion-list-header>
     Today's Violators
   </ion-list-header>
-  <ion-item *ngFor="let violatorsTodayDetails of violatorsTodayObject"> 
+  <ion-item *ngFor="let violatorsTodayDetails of violatorsTodayObject" (click)="getDriverViolations(violatorsTodayDetails)"> 
     <ion-avatar item-left>
       <img src="assets/img/avatar1.png">
     </ion-avatar>

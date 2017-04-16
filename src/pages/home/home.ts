@@ -33,19 +33,34 @@ export class HomePage {
   violatorsTodayDetails= {
     intDriverID:'',
     strDriverLicense:'',
+    strDriverMiddleName:'',
     strDriverFirstName:'',
-    strDriverLastName:''
+    strDriverLastName:'',
+    datLicenseExpiration:'',
+    datDriverBirthday:'',
+    intViolationTransactionHeaderID:'',
+    strControlNumber:'',
+    intEnforcerID:'',
+    strRegistrationSticker:'',
+    strPlateNumber:''
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation : Geolocation, public apiService: ApiService) {
 
-    this.loginDetailsObject = localStorage.getItem('loginDetails');
+    this.loginDetailsObject = window.localStorage.getItem('loginDetails');
 
     this.loginDetails = JSON.parse(this.loginDetailsObject);
 
     this.listViolatorsToday();
 
    // this.getEnforcerDetails();
+  }
+
+  getDriverViolations(violatorsTodayDetails)
+  {
+      this.navCtrl.push(ModalviolatorPage, {
+      violatorsTodayDetails : violatorsTodayDetails
+    });
   }
 
   listViolatorsToday()

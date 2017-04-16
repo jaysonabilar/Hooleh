@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ApiService } from '../../providers/api-service'
+import { TicketPage } from '../ticket/ticket';
 /*
   Generated class for the Violations page.
 
@@ -20,7 +21,8 @@ export class ViolationsPage {
     intViolationID:'',
     strViolationCode:'',
     strViolationDescription:'',
-    dblPrice:''
+    dblPrice:'',
+    isChecked:''
   }
 
   loginDetailsObject: any;
@@ -30,6 +32,10 @@ export class ViolationsPage {
     token:''
   };
 
+  violationsSelected = [
+    { }
+  ];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService) {
 
   	this.loginDetailsObject = localStorage.getItem('loginDetails');
@@ -38,6 +44,7 @@ export class ViolationsPage {
 
     this.listViolatorsToday();
 
+    this.violationsSelected.pop();
   }
 
   listViolatorsToday()
@@ -52,6 +59,45 @@ export class ViolationsPage {
 
     // window.localStorage.setItem('enforcerDetails', JSON.stringify(this.enforcerDetailsObject));
 
+  }
+
+  print(violationsDetails)
+  {
+
+    console.log(violationsDetails.isChecked);
+    if(violationsDetails.isChecked == true)
+    {  
+        var id = violationsDetails.intViolationID;
+         this.violationsSelected.push(
+         {
+             intViolationID: violationsDetails.intViolationID,
+             strViolationCode:violationsDetails.strViolationCode,
+             strViolationDescription:violationsDetails.strViolationDescription,
+             dblPrice:violationsDetails.dblPrice,
+             isChecked:violationsDetails.isChecked
+
+         });
+       //  window.localStorage.setItem(violationsDetails.intViolationID, JSON.stringify(violationsDetails));
+         //this.listOfSelectedViolations.set(violationsDetails.intViolationID,violationsDetails.intViolationID);
+    }
+    else
+    {
+         //this.listOfSelectedViolations.delete(violationsDetails.intViolationID);
+        // window.localStorage.removeItem(violationsDetails.intViolationID);
+         //this.violationsSelected.violationsDetails.pop();
+    }
+
+
+  }
+
+  confirmSelectedViolations()
+  {  
+     window.localStorage.setItem('selectedViolations', JSON.stringify(this.violationsSelected));
+     this.navCtrl.setRoot(TicketPage
+      );
+
+
+      
   }
 
   ionViewDidLoad() {
