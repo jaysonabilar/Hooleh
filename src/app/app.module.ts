@@ -9,6 +9,8 @@ import { ViolationsPage} from '../pages/violations/violations';
 import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { TicketingPage } from '../pages/ticketing/ticketing';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TicketPage,
     LoginPage,
     ModalviolatorPage,
-    ViolationsPage
+    ViolationsPage,
+    TicketingPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -29,8 +32,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TicketPage,
     LoginPage,
     ModalviolatorPage,
-    ViolationsPage
-
+    ViolationsPage,
+    TicketingPage
   ],
   providers: [
     StatusBar,

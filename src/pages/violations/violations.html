@@ -24,9 +24,12 @@
             <ion-checkbox [(ngModel)]="violationsDetails.isChecked" color="secondary" checked="false" (click)="print(violationsDetails)"></ion-checkbox>
         </ion-item>
     </ion-list>
-    <button ion-button icon-left full color="secondary" (click)="confirmSelectedViolations()">
-      <ion-icon name="add"></ion-icon>
-      Add Violation
-    </button>
 
 </ion-content>
+
+<ion-footer>
+    <button ion-button full color="secondary" icon-left (click)="confirmSelectedViolations()">
+      <ion-icon name="done-all"></ion-icon>
+      Fine Ticket
+    </button>
+</ion-footer>
