@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
-var domain = 'http://hooleh.herokuapp.com/';
-// var domain = 'http://localhost:8000/';
+import 'rxjs/add/operator/catch';
+// var domain = 'http://hooleh.herokuapp.com/';
+var domain = 'http://localhost:8000/';
 /*
   Generated class for the ApiService provider.
 
@@ -20,11 +21,11 @@ export class ApiService {
 
 
   login(username,password) {
+    this.object;
     if (this.object) {
       return Promise.resolve(this.object);
     }
     // Dont have the data yet
-
     // let headers = new Headers({'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
 
     let body = new FormData();
@@ -34,10 +35,15 @@ export class ApiService {
     return new Promise(resolve => {
       this.http.post(domain + 'api/authenticate', body)
         .map(res => res.json())
-        .subscribe(data => {
-          this.object = data;
-          resolve(this.object);
-        });
+        .subscribe(
+          data => {
+            this.object = data;
+            resolve(this.object);
+          },
+          err => {
+            console.log(err);
+          }
+        );
     });
   } 
 

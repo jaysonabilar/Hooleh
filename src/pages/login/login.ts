@@ -29,25 +29,30 @@ export class LoginPage {
   loginUser(username, password){
     
     this.apiService.login(username,password)
-      .then(data => { 
+      .then(
+        data => { 
+
         this.token = data.token;
-    });
+
+        var loginDetails = { 
+          'username': username, 
+          'password': password, 
+          'token': this.token
+        };
+
+        window.localStorage.setItem('loginDetails', JSON.stringify(loginDetails));
+         
+        if(this.token.length > 1){
+           this.navCtrl.setRoot(HomePage);
+        }
+
+        console.log(username);
+        console.log(password);
+        console.log(this.token);
+      }
+    );
   
-    console.log(username);
-    console.log(password);
-    console.log(this.token);
-
-    var loginDetails = { 
-      'username': username, 
-      'password': password, 
-      'token': this.token
-    };
-
-    window.localStorage.setItem('loginDetails', JSON.stringify(loginDetails));
-     
-    if(this.token.length > 1){
-       this.navCtrl.setRoot(HomePage);
-    }
+    
       
   }
 
