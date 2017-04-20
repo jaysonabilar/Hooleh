@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
-
+// var domain = 'http://hooleh.herokuapp.com/';
+var domain = 'http://localhost:8000/';
 /*
   Generated class for the ApiService provider.
 
@@ -31,7 +32,7 @@ export class ApiService {
     body.append('password', password);
 
     return new Promise(resolve => {
-      this.http.post('http://localhost:8000/api/authenticate', body)
+      this.http.post(domain + 'api/authenticate', body)
         .map(res => res.json())
         .subscribe(data => {
           this.object = data;
@@ -51,7 +52,7 @@ export class ApiService {
 
     console.log(token);
     return new Promise(resolve => {
-      this.http.get('http://localhost:8000/api/v1/enforcercurrentlogin',options)
+      this.http.get(domain + 'api/v1/enforcercurrentlogin',options)
         .map(res => res.json())
         .subscribe(data => {
           this.object = data;
@@ -74,7 +75,7 @@ export class ApiService {
 
     console.log(token);
     return new Promise(resolve => {
-      this.http.get('http://localhost:8000/api/v1/listviolationtoday',options)
+      this.http.get(domain + 'api/v1/listviolationtoday',options)
         .map(res => res.json())
         .subscribe(data => {
           this.object = data;
@@ -95,7 +96,7 @@ export class ApiService {
 
     console.log(token);
     return new Promise(resolve => {
-      this.http.get('http://localhost:8000/api/v1/violationdetails/' + controlNumber,options)
+      this.http.get(domain + 'api/v1/violationdetails/' + controlNumber,options)
         .map(res => res.json())
         .subscribe(data => {
           this.object = data;
@@ -115,7 +116,7 @@ export class ApiService {
 
     console.log(token);
     return new Promise(resolve => {
-      this.http.get('http://localhost:8000/api/v1/violations',options)
+      this.http.get(domain + 'api/v1/violations',options)
         .map(res => res.json())
         .subscribe(data => {
           this.object = data;
@@ -137,7 +138,7 @@ export class ApiService {
     let options = new RequestOptions({ headers: headers });
 
     return new Promise(resolve => {
-      this.http.get('http://localhost:8000/api/v1/drivers/' + licenseNumber,options)
+      this.http.get(domain + 'api/v1/drivers/' + licenseNumber,options)
         .map(res => res.json())
         .subscribe(data => {
           object = data;
@@ -166,7 +167,7 @@ export class ApiService {
       body.append('violations', violations);
 
     return new Promise(resolve => {
-      this.http.post('http://localhost:8000/api/v1/driverviolations', body, options)
+      this.http.post(domain + 'api/v1/driverviolations', body, options)
         .map(res => res.json())
         .subscribe(data => {
           this.object = data;
@@ -193,7 +194,7 @@ export class ApiService {
       body.append('datDriverBirthday', datDriverBirthday);
 
     return new Promise(resolve => {
-      this.http.post('http://localhost:8000/api/v1/drivers', body, options)
+      this.http.post(domain + 'api/v1/drivers', body, options)
         .map(res => res.json())
         .subscribe(data => {
           this.object = data;
