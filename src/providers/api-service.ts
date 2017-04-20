@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
-// var domain = 'http://hooleh.herokuapp.com/';
-var domain = 'http://localhost:8000/';
+var domain = 'http://hooleh.herokuapp.com/';
+// var domain = 'http://localhost:8000/';
 /*
   Generated class for the ApiService provider.
 
@@ -46,7 +46,7 @@ export class ApiService {
       return Promise.resolve(this.object);
     }
 
-    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded',
+    let headers = new Headers({ 
       'Authorization': 'Bearer ' + token });
     let options = new RequestOptions({ headers: headers });
 
@@ -66,10 +66,7 @@ export class ApiService {
       return Promise.resolve(this.object);
     }
     let headers = new Headers({ 
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer ' + token,
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+      'Authorization': 'Bearer ' + token
     });
     let options = new RequestOptions({ headers: headers });
 
@@ -89,7 +86,6 @@ export class ApiService {
       return Promise.resolve(this.object);
     }
     let headers = new Headers({ 
-      'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Bearer ' + token});
     let options = new RequestOptions({ headers: headers });
 
@@ -110,7 +106,7 @@ export class ApiService {
       return Promise.resolve(this.object);
     }
 
-    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded',
+    let headers = new Headers({ 
       'Authorization': 'Bearer ' + token });
     let options = new RequestOptions({ headers: headers });
 
@@ -133,7 +129,7 @@ export class ApiService {
       return Promise.resolve(this.object);
     }
 
-    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded',
+    let headers = new Headers({ 
       'Authorization': 'Bearer ' + token });
     let options = new RequestOptions({ headers: headers });
 
