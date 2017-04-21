@@ -251,7 +251,6 @@ export class TicketingPage {
 
              window.localStorage.removeItem("selectedViolations");
              window.localStorage.removeItem("sessionDriver");
-             this.navCtrl.setRoot(this.navCtrl.getActive().component);
              this.insertTicketSuccessful();
           }
         }

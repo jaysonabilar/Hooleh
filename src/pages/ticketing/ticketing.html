@@ -15,6 +15,7 @@
 
 
 <ion-content class="floatbutton">
+
 <input type="hidden" [(ngModel)]="driverDetails.dblLongitude" />
 <input type="hidden" [(ngModel)]="driverDetails.dblLatitude" />
 <input type="hidden" [(ngModel)]="driverDetails.isExists" />
@@ -131,7 +132,7 @@
 </div>
 
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="violationsSelectedObject!= null">
     <button ion-button full color="secondary" icon-left (click)="fileTicket(driverDetails.dblLongitude,driverDetails.dblLatitude,driverDetails.strDriverLicense,driverDetails.strDriverFirstName,driverDetails.strDriverMiddleName,driverDetails.strDriverLastName,driverDetails.datDriverBirthday,driverDetails.datLicenseExpiration,driverDetails.intLicenseType,vehicleInfo.strPlateNumber,vehicleInfo.strRegistrationNumber,vehicleInfo.intVehicleType,driverDetails.isExists)">
       <ion-icon name="done-all"></ion-icon>
       File Ticket
