@@ -34,38 +34,38 @@
 
 	  <ion-item>
 	  	<ion-icon name="card" item-left></ion-icon>
-	    <ion-input type="text" placeholder="License Number"></ion-input>
+	    <ion-input type="text" placeholder="License Number" [(ngModel)]="driverDetails.strDriverLicense"></ion-input>
 	  </ion-item>
-	  <button ion-button full secondary icon-left>
+	  <button ion-button full secondary icon-left (click)="searchDriver(driverDetails.strDriverLicense)" >
 	  	<ion-icon name="checkmark"></ion-icon>
 	  	Check License Number
 	  </button>
 	  <br>
 	  <ion-item>
 	  	<ion-icon name="person" item-left></ion-icon>
-	    <ion-input type="text" placeholder="First Name"></ion-input>
+	    <ion-input type="text" placeholder="First Name" [(ngModel)]="driverDetails.strDriverFirstName"></ion-input>
 	  </ion-item>
 	  <ion-item>
 	  	<ion-icon name="person" item-left></ion-icon>
-	    <ion-input type="text" placeholder="Middle Name"></ion-input>
+	    <ion-input type="text" placeholder="Middle Name" [(ngModel)]="driverDetails.strDriverMiddleName"></ion-input>
 	  </ion-item>
 	  <ion-item>
 	  	<ion-icon name="person" item-left></ion-icon>
-	    <ion-input type="text" placeholder="Last Name"></ion-input>
+	    <ion-input type="text" placeholder="Last Name" [(ngModel)]="driverDetails.strDriverLastName"></ion-input>
 	  </ion-item>
 	  <ion-item>
 	  	<ion-icon name="calendar" item-left></ion-icon>
-	    <ion-input type="text" placeholder="Birthday"></ion-input>
+	    <ion-input type="text" placeholder="Birthday" [(ngModel)]="driverDetails.datDriverBirthday"></ion-input>
 	  </ion-item>
 	  <ion-item>
 	  	<ion-icon name="card" item-left></ion-icon>
-	    <ion-input type="text" placeholder="License Expiration Date"></ion-input>
+	    <ion-input type="text" placeholder="License Expiration Date" [(ngModel)]="driverDetails.datLicenseExpiration"></ion-input>
 	  </ion-item>
       	<ion-list>
             <ion-item>
             <ion-icon name="card" item-left></ion-icon>
               <ion-label>License Type</ion-label>
-              <ion-select cancelText="Cancel" okText="Okay">
+              <ion-select cancelText="Cancel" okText="Okay" [(ngModel)]="driverDetails.intLicenseType">
                 <ion-option value="1">Student</ion-option>
                 <ion-option value="2">Non-Professional</ion-option>
                 <ion-option value="3">Professional</ion-option>
@@ -77,17 +77,17 @@
   <ion-list *ngSwitchCase="'Vehicle'">
 	  <ion-item>
 	  	<ion-icon name="car" item-left></ion-icon>
-	    <ion-input type="text" placeholder="Plate Number"></ion-input>
+	    <ion-input type="text" placeholder="Plate Number" [(ngModel)]="vehicleInfo.strPlateNumber"></ion-input>
 	  </ion-item>
 	  <ion-item>
 	  	<ion-icon name="car" item-left></ion-icon>
-	    <ion-input type="text" placeholder="Registration Number"></ion-input>
+	    <ion-input type="text" placeholder="Registration Number" [(ngModel)]="vehicleInfo.strRegistrationNumber"></ion-input>
 	  </ion-item>
       	<ion-list>
             <ion-item>
             <ion-icon name="car" item-left></ion-icon>
               <ion-label>Vehicle Type</ion-label>
-              <ion-select cancelText="Cancel" okText="Okay">
+              <ion-select cancelText="Cancel" okText="Okay" [(ngModel)]="vehicleInfo.intVehicleType">
                   <ion-option value="1">BUS</ion-option>
                   <ion-option value="2">CAR</ion-option>
                   <ion-option value="3">AUV</ion-option>
@@ -105,37 +105,24 @@
   </ion-list>
 
   <ion-list *ngSwitchCase="'Ticket'">
- 	  <button ion-button full secondary icon-left>
+ 	  <button ion-button full secondary icon-left (click)="showListOfViolations()">
 	  	<ion-icon name="add"></ion-icon>
 	  	Add Violation/s
 	  </button>
 
-	  	<div class="ticketcopy">
-		  <ion-item>
-		    <h2>Beating the red light</h2>
-		    <h3>Code 420</h3>
-		    <p>80.00php</p>
-		  </ion-item>
-		  <ion-item>
-		    <h2>Beating the red light</h2>
-		    <h3>Code 420</h3>
-		    <p>80.00php</p>
-		  </ion-item>
-		  <ion-item>
-		    <h2>Beating the red light</h2>
-		    <h3>Code 420</h3>
-		    <p>80.00php</p>
-		  </ion-item>
-		  <ion-item>
-		    <h2>Beating the red light</h2>
-		    <h3>Code 420</h3>
-		    <p>80.00php</p>
-		  </ion-item>
-		</div>
- 	  <button ion-button full color="secondary" icon-left>
+	  	<ion-list-header>
+          Violation/s
+        </ion-list-header>
+          <ion-item *ngFor="let violationsSelected of violationsSelectedObject">
+            <h2>{{violationsSelected.strViolationDescription}}</h2>
+            <p>Php {{violationsSelected.dblPrice}}</p>
+            <p>{{violationsSelected.strViolationCode}}</p>
+          </ion-item>
+
+ 	  <!-- <button ion-button full color="secondary" icon-left>
 	  	<ion-icon name="done-all"></ion-icon>
 	  	Fine Ticket
-	  </button>
+	  </button> -->
   </ion-list>
 </div>
 

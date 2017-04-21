@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ApiService } from '../../providers/api-service'
 import { TicketPage } from '../ticket/ticket';
+import { TicketingPage } from '../ticketing/ticketing';
 /*
   Generated class for the Violations page.
 
@@ -93,10 +94,7 @@ export class ViolationsPage {
   confirmSelectedViolations()
   {  
      window.localStorage.setItem('selectedViolations', JSON.stringify(this.violationsSelected));
-     this.navCtrl.setRoot(TicketPage
-      );
-
-
+     this.navCtrl.setRoot(TicketingPage);
       
   }
 

@@ -142,10 +142,15 @@ export class ApiService {
     return new Promise(resolve => {
       this.http.get(domain + 'api/v1/drivers/' + licenseNumber,options)
         .map(res => res.json())
-        .subscribe(data => {
-          object = data;
-          resolve(object);
-        });
+        .subscribe(
+          data => {
+            object = data;
+            resolve(object);
+          },
+          err => {
+            console.log('driver not found.');
+          }
+        );
     });
   } 
 
