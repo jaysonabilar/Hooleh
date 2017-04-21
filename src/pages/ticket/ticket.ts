@@ -123,9 +123,7 @@ export class TicketPage {
           this.driverDetails.strLicenseType = '';
           this.driverDetails.isExists = '0';
        }
-
-
-
+       
     });
  
 

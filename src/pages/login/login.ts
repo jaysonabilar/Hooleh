@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController} from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ApiService } from '../../providers/api-service';
 /*
@@ -22,7 +22,7 @@ export class LoginPage {
 
   token : string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService,private alertCtrl: AlertController) {
     this.token = '';
   }
 
@@ -40,8 +40,17 @@ export class LoginPage {
           'token': this.token
         };
 
+        window.localStorage.removeItem("selectedViolations");
+        window.localStorage.removeItem("sessionDriver");
         window.localStorage.setItem('loginDetails', JSON.stringify(loginDetails));
          
+        if(data.token){
+          this.loginSuccessful();
+        }
+        else{
+            this.loginFailed();
+        }
+
         if(this.token.length > 1){
            this.navCtrl.setRoot(HomePage);
         }
@@ -49,11 +58,29 @@ export class LoginPage {
         console.log(username);
         console.log(password);
         console.log(this.token);
+
+      
       }
     );
   
     
       
+  }
+
+  loginSuccessful() {
+    let alert = this.alertCtrl.create({
+      title: "Login is successful!",
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
+  loginFailed(){
+     let alert = this.alertCtrl.create({
+      title: "Invalid email account or password!",
+      buttons: ['Ok']
+    });
+    alert.present();
   }
 
   ionViewDidLoad() {

@@ -5,16 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>ticketing</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Violator's Ticket</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content class="floatbutton">
-
+<input type="hidden" [(ngModel)]="driverDetails.dblLongitude" />
+<input type="hidden" [(ngModel)]="driverDetails.dblLatitude" />
+<input type="hidden" [(ngModel)]="driverDetails.isExists" />
 <div padding>
   <ion-segment [(ngModel)]="ViolatorsProfile">
     <ion-segment-button value="Personal" class="active">
@@ -36,7 +39,7 @@
 	  	<ion-icon name="card" item-left></ion-icon>
 	    <ion-input type="text" placeholder="License Number" [(ngModel)]="driverDetails.strDriverLicense"></ion-input>
 	  </ion-item>
-	  <button ion-button full secondary icon-left (click)="searchDriver(driverDetails.strDriverLicense)" >
+	  <button ion-button full secondary icon-left (click)="searchDriver(driverDetails.strDriverLicense)">
 	  	<ion-icon name="checkmark"></ion-icon>
 	  	Check License Number
 	  </button>
@@ -105,7 +108,8 @@
   </ion-list>
 
   <ion-list *ngSwitchCase="'Ticket'">
- 	  <button ion-button full secondary icon-left (click)="showListOfViolations()">
+ 	  <button ion-button full secondary icon-left (click)="showListOfViolations( driverDetails.strDriverLicense, driverDetails.strDriverFirstName,
+ 	  			driverDetails.strDriverMiddleName, driverDetails.strDriverLastName, driverDetails.datDriverBirthday, driverDetails.datLicenseExpiration, driverDetails.intLicenseType, vehicleInfo.strPlateNumber, vehicleInfo.strRegistrationNumber, vehicleInfo.intVehicleType, driverDetails.isExists)">
 	  	<ion-icon name="add"></ion-icon>
 	  	Add Violation/s
 	  </button>
@@ -127,3 +131,9 @@
 </div>
 
 </ion-content>
+<ion-footer>
+    <button ion-button full color="secondary" icon-left (click)="fileTicket(driverDetails.dblLongitude,driverDetails.dblLatitude,driverDetails.strDriverLicense,driverDetails.strDriverFirstName,driverDetails.strDriverMiddleName,driverDetails.strDriverLastName,driverDetails.datDriverBirthday,driverDetails.datLicenseExpiration,driverDetails.intLicenseType,vehicleInfo.strPlateNumber,vehicleInfo.strRegistrationNumber,vehicleInfo.intVehicleType,driverDetails.isExists)">
+      <ion-icon name="done-all"></ion-icon>
+      File Ticket
+    </button>
+</ion-footer>

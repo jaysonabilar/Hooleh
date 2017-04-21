@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ApiService } from '../../providers/api-service';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ViolationsPage} from '../violations/violations';
@@ -61,14 +61,28 @@ export class TicketingPage {
   violationsObject: any;
   violationsSelectedObject: any;
 
+  sessionDriverObject:any;
+  sessionDriverDetails = { 
+        strDriverLicense : '', 
+        strDriverFirstName: '', 
+        strDriverMiddleName: '',
+        strDriverLastName: '', 
+        datDriverBirthday: '', 
+        datLicenseExpiration: '',
+        intLicenseType: '', 
+        strPlateNumber: '', 
+        strRegistrationNumber: '',
+        intVehicleType: '',
+        isExists:''
+      };
+
   object:any;
 
 	ViolatorsProfile: string = "Personal";
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService, public geolocation : Geolocation) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService, public geolocation : Geolocation,
+    private alertCtrl: AlertController) {
       this.loginDetailsObject = localStorage.getItem('loginDetails');
-
       this.loginDetails = JSON.parse(this.loginDetailsObject);
-
 
 
       if (this.violationsObject = window.localStorage.getItem('selectedViolations')){
@@ -77,7 +91,23 @@ export class TicketingPage {
         console.log(this.violationsSelectedObject);
       }
 
-        
+      if (this.sessionDriverObject = window.localStorage.getItem('sessionDriver')){
+        this.sessionDriverDetails = JSON.parse(this.sessionDriverObject);
+
+        this.driverDetails.strDriverLicense = this.sessionDriverDetails.strDriverLicense;
+        this.driverDetails.strDriverFirstName = this.sessionDriverDetails.strDriverFirstName;
+        this.driverDetails.strDriverMiddleName = this.sessionDriverDetails.strDriverMiddleName;
+        this.driverDetails.strDriverLastName = this.sessionDriverDetails.strDriverLastName;
+        this.driverDetails.intLicenseType = this.sessionDriverDetails.intLicenseType;
+        this.driverDetails.datLicenseExpiration = this.sessionDriverDetails.datLicenseExpiration;
+        this.driverDetails.datDriverBirthday = this.sessionDriverDetails.datDriverBirthday;
+        this.driverDetails.isExists = this.sessionDriverDetails.isExists;
+        this.vehicleInfo.strPlateNumber = this.sessionDriverDetails.strPlateNumber;
+        this.vehicleInfo.strRegistrationNumber = this.sessionDriverDetails.strRegistrationNumber;
+        this.vehicleInfo.intVehicleType = this.sessionDriverDetails.intVehicleType;
+        console.log(this.driverDetails);
+
+      }
 
      this.geolocation.getCurrentPosition().then(res => {
      this.driverDetails.dblLatitude = res.coords.latitude.toString()
@@ -95,38 +125,151 @@ export class TicketingPage {
     this.apiService.getSelectedDriver(this.loginDetails.token,strDriverLicense)
       .then(
         data => { 
-          console.log(data);
-          this.driverDetails.intDriverID = data.intDriverID;
-         // this.driverDetails.strDriverLicense = data.strDriverLicense;
-          this.driverDetails.strDriverFirstName = data.strDriverFirstname;
-          this.driverDetails.strDriverMiddleName = data.strDriverMiddlename;
-          this.driverDetails.strDriverLastName = data.strDriverLastname;
-          this.driverDetails.intLicenseType = data.intLicenseType;
-          this.driverDetails.datLicenseExpiration = data.datLicenseExpiration;
-          this.driverDetails.datDriverBirthday = data.datDriverBirthday;
-          this.driverDetails.strLicenseType = data.strLicenseType;
-          this.driverDetails.isExists = '1';
+            console.log(data);
+          if(data.intDriverID){
+            this.driverDetails.intDriverID = data.intDriverID;
+           // this.driverDetails.strDriverLicense = data.strDriverLicense;
+            this.driverDetails.strDriverFirstName = data.strDriverFirstname;
+            this.driverDetails.strDriverMiddleName = data.strDriverMiddlename;
+            this.driverDetails.strDriverLastName = data.strDriverLastname;
+            this.driverDetails.intLicenseType = data.intLicenseType;
+            this.driverDetails.datLicenseExpiration = data.datLicenseExpiration;
+            this.driverDetails.datDriverBirthday = data.datDriverBirthday;
+            this.driverDetails.strLicenseType = data.strLicenseType;
+            this.driverDetails.isExists = '1';
+            console.log('meron');        
+
+         }
+         else{
+           console.log('wala');
+            this.driverDetails.strDriverFirstName = '';
+            this.driverDetails.strDriverMiddleName = '';
+            this.driverDetails.strDriverLastName = '';
+            this.driverDetails.intLicenseType = '';
+            this.driverDetails.datLicenseExpiration = '';
+            this.driverDetails.datDriverBirthday = '';
+            this.driverDetails.strLicenseType = '';
+            this.driverDetails.isExists = '0';
+            this.driverNotExist(strDriverLicense);
+         }
       }
     );
   }
 
-  showListOfViolations()
-  {
-    //  var sessionDriver = { 
-    //   'firstname': this.driverDetails.strDriverFirstName, 
-    //   'middlename': this.driverDetails.strDriverMiddleName, 
-    //   'lastname': this.driverDetails.strDriverLastName,
-    //   'bday' : this.driverDetails.datDriverBirthday,
-    //   'licensetype' : this.driverDetails.strLicenseType,
-    //   'licenseexpiration' : this.driverDetails.datLicenseExpiration
-    // };
+  driverNotExist(strDriverLicense) {
+    let alert = this.alertCtrl.create({
+      title: "License Number : " + strDriverLicense,
+      subTitle : " has no records yet",
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
 
-    //  window.localStorage.setItem('sessionDriver', JSON.stringify(sessionDriver));
+
+
+  showListOfViolations(strDriverLicense, strDriverFirstName,strDriverMiddleName, strDriverLastName, datDriverBirthday, datLicenseExpiration,
+         intLicenseType, strPlateNumber, strRegistrationNumber, intVehicleType, isExists)
+  {
+    
+     var sessionDriver = { 
+        'strDriverLicense': strDriverLicense, 
+        'strDriverFirstName': strDriverFirstName, 
+        'strDriverMiddleName': strDriverMiddleName,
+        'strDriverLastName': strDriverLastName, 
+        'datDriverBirthday': datDriverBirthday, 
+        'datLicenseExpiration': datLicenseExpiration,
+        'intLicenseType': intLicenseType, 
+        'strPlateNumber': strPlateNumber, 
+        'strRegistrationNumber': strRegistrationNumber,
+        'intVehicleType': intVehicleType,
+        'isExists': isExists
+      };
+
+      window.localStorage.setItem('sessionDriver', JSON.stringify(sessionDriver));
+
     this.navCtrl.push(ViolationsPage);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TicketingPage');
   }
+
+  fileTicket(dblLongitude, dblLatitude, strDriverLicense, strDriverFirstName,strDriverMiddleName, strDriverLastName, 
+    datDriverBirthday, datLicenseExpiration,intLicenseType, strPlateNumber, strRegistrationSticker, intVehicleTypeID,isExists)
+  {
+    console.log(dblLongitude);
+    console.log(dblLatitude);
+    console.log(strDriverLicense);
+    console.log(strDriverFirstName);
+    console.log(strDriverMiddleName);
+    console.log(strDriverLastName);
+    console.log(datDriverBirthday);
+    console.log(datLicenseExpiration);
+    console.log(intLicenseType);
+    console.log(strPlateNumber);
+    console.log(strRegistrationSticker);
+    console.log(intVehicleTypeID);
+    console.log(isExists);
+
+     let alert = this.alertCtrl.create({
+      title: 'Confirm Transaction',
+      message: 'Are you really want to file the ticket now?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+             console.log('Cancel Ticketing');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            if(isExists == '1')
+            {
+              this.apiService.addTicket(this.loginDetails.token, strDriverLicense, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
+                      dblLatitude, dblLongitude, this.violationsObject)
+                .then(data => { 
+                  this.object= data;
+              });
+            }
+            else
+            {
+              this.apiService.addDriver(this.loginDetails.token, strDriverLicense, strDriverFirstName, strDriverMiddleName, strDriverLastName,
+                      intLicenseType, datLicenseExpiration, datDriverBirthday)
+                .then(data => { 
+                  this.object= data;
+              });
+
+               this.apiService.addTicket(this.loginDetails.token, strDriverLicense, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
+                      dblLatitude, dblLongitude, this.violationsObject)
+                .then(data => { 
+                  this.object= data;
+              });
+
+            }
+
+             window.localStorage.removeItem("selectedViolations");
+             window.localStorage.removeItem("sessionDriver");
+             this.insertTicketSuccessful();
+          }
+        }
+      ]
+    });
+    alert.present();
+
+    
+      
+  }
+
+  insertTicketSuccessful() {
+    let alert = this.alertCtrl.create({
+      title: "New Ticket has been sucessfully added!",
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
+
 
 }
