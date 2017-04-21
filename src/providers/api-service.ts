@@ -166,7 +166,7 @@ export class ApiService {
       let body = new FormData();
       body.append('strDriverLicenseNumber', strDriverLicenseNumber);
       body.append('strRegistrationSticker', strRegistrationSticker);
-      body.append('strControlNumber', '992222');
+      body.append('strControlNumber', '112222');
       body.append('strPlateNumber', strPlateNumber);
       body.append('intVehicleTypeID', intVehicleTypeID);
       body.append('dblLatitude', dblLatitude);

@@ -53,6 +53,9 @@ export class HomePage {
 
     this.listViolatorsToday();
 
+     window.localStorage.removeItem("selectedViolations");
+     window.localStorage.removeItem("sessionDriver");
+
    // this.getEnforcerDetails();
   }
 
