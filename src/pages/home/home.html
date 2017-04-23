@@ -13,7 +13,7 @@
     <ion-title>Violator's Ticket</ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click) = "presentTicket()">
-        <ion-icon name="add"></ion-icon>
+        <ion-icon name="log-out"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -25,7 +25,7 @@
   [(ngModel)]="searchedDriverLicense"
   [showCancelButton]="shouldShowCancel"
   (ionInput)="onInputSearch(searchedDriverLicense)"
-  (ionCancel)="onCancelSearch(searchedDriverLicense)">
+  (ionCancel)="onCancelSearch()">
 
 </ion-searchbar>
 <ion-list>

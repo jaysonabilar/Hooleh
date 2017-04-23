@@ -16,17 +16,20 @@
 
 
 <ion-content>
+
 <input type="hidden" [(ngModel)]="driverDetails.dblLongitude" />
 <input type="hidden" [(ngModel)]="driverDetails.dblLatitude" />
 <input type="hidden" [(ngModel)]="driverDetails.isExists" />
-
+<form #form="ngForm" (ngSubmit)="logForm()">
 <ion-list>
   <ion-item>
     <ion-icon name="card" item-left></ion-icon>
-    <ion-input type="text" placeholder="License Number" [(ngModel)]="driverDetails.strDriverLicense"></ion-input>
+    <ion-input type="text" placeholder="License Number" [(ngModel)]="driverDetails.strDriverLicense" required
+     name="first"></ion-input>
   </ion-item>
-    <button ion-button block (click)="searchDriver(driverDetails.strDriverLicense)">Check Violator</button>
+    <button ion-button block type="submit">Check Violator</button>
 </ion-list>
+</form>
 
     <ion-list>
         <ion-list-header>
@@ -112,6 +115,6 @@
           </ion-item>
     </ion-list>
     <button ion-button block color="secondary" (click)="fileTicket(driverDetails.dblLongitude,driverDetails.dblLatitude,driverDetails.strDriverLicense,driverDetails.strDriverFirstName,driverDetails.strDriverMiddleName,driverDetails.strDriverLastName,driverDetails.datDriverBirthday,driverDetails.datLicenseExpiration,driverDetails.intLicenseType,driverDetails.strPlateNumber,driverDetails.strRegistrationSticker,driverDetails.intVehicleTypeID,driverDetails.isExists)">File Ticket</button>
-   
+  
 </ion-content>
 

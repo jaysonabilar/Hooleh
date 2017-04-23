@@ -26,6 +26,11 @@ export class LoginPage {
     this.token = '';
   }
 
+   logForm()
+  {
+    console.log("WEWEW");
+  }
+  
   loginUser(username, password){
     
     this.apiService.login(username,password)

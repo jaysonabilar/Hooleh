@@ -11,28 +11,30 @@
 </ion-header>
 
 <ion-content padding class="loginbg">
-    
-<div class="logoContainer">
-    <img src="assets/img/hooleh-logo.png" class="hoolehlogo">    
-</div>
-    
-<ion-list>
-    
-    <ion-item class="loginUsername">
-        <ion-icon name="contact" item-left></ion-icon>
-        <ion-input [(ngModel)]="login.username" type="text" placeholder="Username"></ion-input>
-    </ion-item>
+<form #form="ngForm">
+  <div class="logoContainer">
+      <img src="assets/img/hooleh-logo.png" class="hoolehlogo">    
+  </div>
+      
+  <ion-list>
+      
+      <ion-item class="loginUsername">
+          <ion-icon name="contact" item-left></ion-icon>
+          <ion-input [(ngModel)]="login.username" type="text" placeholder="Username" 
+          required name="Username"></ion-input>
+      </ion-item>
 
-    <ion-item class="loginPassword">
-        <ion-icon name="lock" item-left></ion-icon>
-        <ion-input [(ngModel)]="login.password" type="password" placeholder="Password"></ion-input>
-    </ion-item>
+      <ion-item class="loginPassword">
+          <ion-icon name="lock" item-left></ion-icon>
+          <ion-input [(ngModel)]="login.password" type="password" placeholder="Password"
+          required name="Password"></ion-input>
+      </ion-item>
 
-</ion-list>
+  </ion-list>
 
-<div>
-    <button (click)="loginUser(login.username,login.password)" ion-button full medium>Sign In</button>
-</div>
-    
+  <div>
+      <button (click)="loginUser(login.username,login.password)" ion-button full medium>Sign In</button>
+  </div>
+</form>
 </ion-content>
 

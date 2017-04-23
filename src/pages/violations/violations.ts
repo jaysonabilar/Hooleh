@@ -34,7 +34,13 @@ export class ViolationsPage {
   };
 
   violationsSelected = [
-    { }
+    { 
+         intViolationID: '',
+         strViolationCode:'',
+         strViolationDescription:'',
+         dblPrice:'',
+         isChecked:'',
+    }
   ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService) {
@@ -64,7 +70,6 @@ export class ViolationsPage {
 
   print(violationsDetails)
   {
-
     console.log(violationsDetails.isChecked);
     if(violationsDetails.isChecked == true)
     {  
@@ -86,13 +91,20 @@ export class ViolationsPage {
          //this.listOfSelectedViolations.delete(violationsDetails.intViolationID);
         // window.localStorage.removeItem(violationsDetails.intViolationID);
          //this.violationsSelected.violationsDetails.pop();
-    }
 
+         var index = this.violationsSelected.findIndex(function(o)
+         {
+             return o.intViolationID === violationsDetails.intViolationID;
+         })
+
+         this.violationsSelected.splice(index, 1);
+    }
 
   }
 
   confirmSelectedViolations()
   {  
+     
      window.localStorage.setItem('selectedViolations', JSON.stringify(this.violationsSelected));
      this.navCtrl.setRoot(TicketingPage);
       

@@ -88,6 +88,10 @@ export class TicketPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TicketPage');
   }
+  logForm()
+  {
+    console.log("WEWEW");
+  }
 
   searchDriver(strDriverLicense)
   {  
