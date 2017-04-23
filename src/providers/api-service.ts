@@ -3,7 +3,7 @@ import { Http, Headers,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 // var domain = 'http://hooleh.herokuapp.com/';
-var domain = 'http://hooleh.herokuapp.com/';
+var domain = 'http://localhost:8000/';
 /*
   Generated class for the ApiService provider.
 
@@ -87,6 +87,33 @@ export class ApiService {
     });
   } 
 
+  getViolatorsTodaySearched(token,licenseNumber) {
+    console.log('this' + 'POTAENA' + licenseNumber);
+    var object;
+    if (this.object) {
+     
+    }
+
+
+    let headers = new Headers({ 
+      'Authorization': 'Bearer ' + token });
+    let options = new RequestOptions({ headers: headers });
+
+    return new Promise(resolve => {
+      this.http.get(domain + 'api/v1/listviolationtodaysearchselected/' + licenseNumber,options)
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            object = data;
+            resolve(object);
+          },
+          err => {
+            console.log('driver not found.');
+          }
+        );
+    });
+  } 
+
   getDriverViolations(token,controlNumber) {
     if (this.object) {
       return Promise.resolve(this.object);
@@ -166,7 +193,7 @@ export class ApiService {
       let body = new FormData();
       body.append('strDriverLicenseNumber', strDriverLicenseNumber);
       body.append('strRegistrationSticker', strRegistrationSticker);
-      body.append('strControlNumber', '565656');
+      body.append('strControlNumber', '568135');
       body.append('strPlateNumber', strPlateNumber);
       body.append('intVehicleTypeID', intVehicleTypeID);
       body.append('dblLatitude', dblLatitude);

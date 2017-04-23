@@ -21,7 +21,13 @@
 
 <ion-content padding>
   
-<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+<ion-searchbar
+  [(ngModel)]="searchedDriverLicense"
+  [showCancelButton]="shouldShowCancel"
+  (ionInput)="onInputSearch(searchedDriverLicense)"
+  (ionCancel)="onCancelSearch(searchedDriverLicense)">
+
+</ion-searchbar>
 <ion-list>
   <ion-list-header>
     Today's Violators

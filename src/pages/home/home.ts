@@ -45,6 +45,8 @@ export class HomePage {
     strPlateNumber:''
   }
 
+  searchedDriverLicense:'';
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation : Geolocation, public apiService: ApiService) {
 
     this.loginDetailsObject = window.localStorage.getItem('loginDetails');
@@ -55,6 +57,7 @@ export class HomePage {
 
      window.localStorage.removeItem("selectedViolations");
      window.localStorage.removeItem("sessionDriver");
+     this.searchedDriverLicense = '';
 
    // this.getEnforcerDetails();
   }
@@ -80,6 +83,31 @@ export class HomePage {
 
   }
 
+  onInputSearch(searched)
+  {
+    if(searched=='')
+    {
+      console.log("pita");
+      this.listViolatorsToday();
+    }
+    else
+    {
+      console.log("pita");
+      this.apiService.getViolatorsTodaySearched(this.loginDetails.token,searched)
+        .then(data => { 
+          console.log(data);
+          this.violatorsTodayObject = data;
+
+       });
+        console.log(this.violatorsTodayObject);
+    }
+
+  }
+
+  onCancelSearch()
+  {
+    this.listViolatorsToday();
+  }
   /*
   getEnforcerDetails()
   {
