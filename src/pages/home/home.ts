@@ -33,9 +33,9 @@ export class HomePage {
   violatorsTodayDetails= {
     intDriverID:'',
     strDriverLicense:'',
-    strDriverMiddleName:'',
-    strDriverFirstName:'',
-    strDriverLastName:'',
+    strDriverMiddlename:'',
+    strDriverFirstname:'',
+    strDriverLastname:'',
     datLicenseExpiration:'',
     datDriverBirthday:'',
     intViolationTransactionHeaderID:'',

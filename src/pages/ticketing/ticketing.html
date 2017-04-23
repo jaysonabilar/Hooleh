@@ -59,11 +59,12 @@
 	  </ion-item>
 	  <ion-item>
 	  	<ion-icon name="calendar" item-left></ion-icon>
-	    <ion-input type="text" placeholder="Birthday" [(ngModel)]="driverDetails.datDriverBirthday"></ion-input>
+      <ion-datetime placeholder="Birth Day" displayFormat="DD/MM/YYYY" [(ngModel)]="driverDetails.datDriverBirthday"></ion-datetime>
 	  </ion-item>
 	  <ion-item>
 	  	<ion-icon name="card" item-left></ion-icon>
-	    <ion-input type="text" placeholder="License Expiration Date" [(ngModel)]="driverDetails.datLicenseExpiration"></ion-input>
+      <ion-datetime placeholder="License Expiration Date" displayFormat="DD/MM/YYYY" [(ngModel)]="driverDetails.datLicenseExpiration">
+      </ion-datetime>
 	  </ion-item>
       	<ion-list>
             <ion-item>

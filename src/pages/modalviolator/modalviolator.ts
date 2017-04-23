@@ -25,9 +25,9 @@ export class ModalviolatorPage {
   violator= {
     intDriverID:'',
     strDriverLicense:'',
-    strDriverMiddleName:'',
-    strDriverFirstName:'',
-    strDriverLastName:'',
+    strDriverMiddlename:'',
+    strDriverFirstname:'',
+    strDriverLastname:'',
     datLicenseExpiration:'',
     datDriverBirthday:'',
     intViolationTransactionHeaderID:'',
@@ -43,14 +43,15 @@ export class ModalviolatorPage {
   	intViolationID:'',
   	strViolationCode:'',
   	strViolationDescription:'',
-  	dblPrice:''
+  	dblPrice:'',
+    blPaymentStatus:''
   }
 
-  
+  violatorObject:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService) {
   	this.violator = this.navParams.get('violatorsTodayDetails');
-
+    this.violatorObject = this.navParams.get('violatorsTodayDetails');
   	this.loginDetailsObject = localStorage.getItem('loginDetails');
 
     this.loginDetails = JSON.parse(this.loginDetailsObject);

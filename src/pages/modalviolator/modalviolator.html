@@ -7,39 +7,76 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Violator's Profile</ion-title>
+    <ion-title>Violator's Info</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-
   <ion-item>
     <ion-avatar item-left>
-      <img src="../../assets/img/avatar1.png">
+      <img src="assets/img/avatar1.png">
     </ion-avatar>
-    <h2>{{violator.strDriverFirstName}}</h2>
-    <p>{{violator.strDriverLastName}}</p>
+    <h2>{{violatorObject.strDriverFirstname}}</h2>
+    <p>{{violatorObject.strDriverLastname}}</p>
   </ion-item>
 
-     <ion-list>
-      <ion-list *ngFor="let violationDetails of violationsObject">
+    <div padding>
+      <ion-segment [(ngModel)]="violator">
+        <ion-segment-button value="Profile">
+          Profile
+        </ion-segment-button>
+        <ion-segment-button value="Violations">
+          Violations Commit
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+      <div [ngSwitch]="violator">
+        <ion-list *ngSwitchCase="'Profile'">
           <ion-item>
-          <ion-icon name="car" item-left></ion-icon>
-            Violation Code
-          <p item-right>{{violationDetails.strViolationCode}}</p>
+            <p>Full Name : </p><h2>{{violatorObject.strDriverLastname}} {{violatorObject.strDriverFirstname}}, {{violatorObject.strDriverMiddlename}}</h2>
+          </ion-item>
+           <ion-item>
+            <p>BirthDate : </p><h2>{{violatorObject.datDriverBirthday}}</h2>
           </ion-item>
           <ion-item>
-            <ion-icon name="cash" item-left></ion-icon>
-            Violation Description
-            <p item-right>{{violationDetails.strViolationDescription}}</p>
+            <p>License # : </p><h2>{{violatorObject.strDriverLicense}}</h2>
           </ion-item>
           <ion-item>
-            <ion-icon name="cash" item-left></ion-icon>
-            Violation Price
-            <p item-right>{{violationDetails.dblPrice}}</p>
-          </ion-item>   
+            <p>License Expiration Date : </p><h2>{{violatorObject.datLicenseExpiration}}</h2>
+          </ion-item>
+           <ion-item>
+            <p>Car Used Plate # : </p><h2>{{violatorObject.strPlateNumber}}</h2>
+          </ion-item>
+        </ion-list>
+
+      <ion-list *ngSwitchCase="'Violations'">
+          <ion-list *ngFor="let violationDetails of violationsObject">
+              <ion-item>
+              <p>Violation Code</p>
+              <h2 >{{violationDetails.strViolationCode}}</h2>
+
+               <ion-item text-wrap>
+                <ion-icon name="car" item-left></ion-icon>
+                <p>Violation Description</p>
+                <h2>{{violationDetails.strViolationDescription}}</h2>
+              </ion-item>
+              <ion-item>
+                <ion-icon name="cash" item-left></ion-icon>
+                <p>Violation Price</p>
+                <h2>PHP {{violationDetails.dblPrice}}</h2>
+              </ion-item>   
+              <ion-item>
+                <ion-icon name="card" item-left></ion-icon>
+                <p>Payment Status</p>
+                <div *ngIf="violationDetails.blPaymentStatus == '1'"><h2>Paid</h2></div>
+                <div *ngIf="violationDetails.blPaymentStatus == '0'"><h2>Unpaid</h2></div>
+              </ion-item>   
+              </ion-item>
+             
+          </ion-list>
       </ion-list>
-    </ion-list>
+    </div>
 </ion-content>
 
