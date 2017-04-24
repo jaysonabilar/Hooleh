@@ -36,7 +36,7 @@ export class LoginPage {
     this.apiService.login(username,password)
       .then(
         data => { 
-
+        console.log(data);
         this.token = data.token;
 
         var loginDetails = { 
@@ -48,23 +48,15 @@ export class LoginPage {
         window.localStorage.removeItem("selectedViolations");
         window.localStorage.removeItem("sessionDriver");
         window.localStorage.setItem('loginDetails', JSON.stringify(loginDetails));
-         
-        if(data.token){
-          this.loginSuccessful();
-        }
-        else{
-            this.loginFailed();
-        }
 
         if(this.token.length > 1){
+           this.loginSuccessful();
            this.navCtrl.setRoot(HomePage);
         }
+        else{
+           this.loginFailed();
+        }
 
-        console.log(username);
-        console.log(password);
-        console.log(this.token);
-
-      
       }
     );
   

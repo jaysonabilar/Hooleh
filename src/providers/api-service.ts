@@ -40,8 +40,38 @@ export class ApiService {
             this.object = data;
             resolve(this.object);
           },
-          err => {
-            console.log(err);
+          error => {
+            console.log(JSON.stringify(error.json()));
+          }
+        );
+    });
+  } 
+
+  logout(token) {
+
+    console.log(token);
+    this.object;
+    if (this.object) {
+      return Promise.resolve(this.object);
+    }
+    // Dont have the data yet
+    // let headers = new Headers({'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
+
+    let headers = new Headers({ 
+      'Authorization': 'Bearer ' + token });
+    let options = new RequestOptions({ headers: headers });
+    
+
+    return new Promise(resolve => {
+      this.http.post(domain + 'api/logout', options)
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            this.object = data;
+            resolve(this.object);
+          },
+          error => {
+            console.log(JSON.stringify(error.json()));
           }
         );
     });

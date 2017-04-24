@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController} from 'ionic-angular';
 import { ModalviolatorPage } from '../modalviolator/modalviolator';
 import { TicketPage } from '../ticket/ticket';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ApiService } from '../../providers/api-service';
+import { LoginPage } from '../login/login';
 /*
   Generated class for the Home page.
 
@@ -47,7 +48,8 @@ export class HomePage {
 
   searchedDriverLicense:'';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation : Geolocation, public apiService: ApiService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation : Geolocation, public apiService: ApiService,
+    private alertCtrl: AlertController) {
 
     this.loginDetailsObject = window.localStorage.getItem('loginDetails');
 
@@ -139,17 +141,35 @@ export class HomePage {
     console.log(this.long);
   }
   
-  presentTicket() {
+  logout()
+  {
+   
+      let alert = this.alertCtrl.create({
+      title: 'Confirm logout',
+      message: 'Are you really want to Logout now?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+             console.log('Cancel Ticketing');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {  
+              this.apiService.logout(this.loginDetails.token)
+              .then(data => { 
+                console.log(data);
+             });
 
-     this.geolocation.getCurrentPosition().then(res => {
-     this.lat = res.coords.latitude;
-     this.long = res.coords.longitude;
-    }).catch((error) => {
-      console.log('Error getting location', error);
+             this.navCtrl.setRoot(LoginPage);
+
+          }
+        }
+      ]
     });
-
-    console.log(this.lat);
-    console.log(this.long);
+    alert.present();
   }
   
 }
