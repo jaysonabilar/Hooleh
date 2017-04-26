@@ -64,7 +64,7 @@ export class ApiService {
   loginErrorHandler(error: Response)
   {
 
-    return Observable.throw(error || "shit");
+    return Observable.throw(error || "loginError");
   }
 
 
@@ -139,7 +139,6 @@ export class ApiService {
   } 
 
   getViolatorsTodaySearched(token,licenseNumber) {
-    console.log('this' + 'POTAENA' + licenseNumber);
     var object;
     if (this.object) {
      
@@ -243,15 +242,43 @@ export class ApiService {
   }
 
 
+  // addTicket(token, strDriverLicenseNumber, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
+  //               dblLatitude, dblLongitude, violations) {
+
+  //    let headers = new Headers({
+  //     'Authorization': 'Bearer ' + token });
+  //    let options = new RequestOptions({ headers: headers });
+
+  //    console.log('pota ' + token);
+  //     let body = new FormData();
+  //     body.append('strDriverLicenseNumber', strDriverLicenseNumber);
+  //     body.append('strRegistrationSticker', strRegistrationSticker);
+  //     body.append('strPlateNumber', strPlateNumber);
+  //     body.append('intVehicleTypeID', intVehicleTypeID);
+  //     body.append('dblLatitude', dblLatitude);
+  //     body.append('dblLongitude', dblLongitude);
+  //     body.append('violations', violations);
+
+  //   return new Promise(resolve => {
+  //     this.http.post(domain + 'api/v1/driverviolations', body, options)
+  //       .map(res => res.json())
+  //       .subscribe(data => {
+  //         this.object = data;
+  //         resolve(this.object);
+  //       });
+  //   });
+  // } 
+
+
   addTicket(token, strDriverLicenseNumber, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
-                dblLatitude, dblLongitude, violations) {
+                dblLatitude, dblLongitude, violations) 
+  {
 
-     let headers = new Headers({
-      'Authorization': 'Bearer ' + token });
-     let options = new RequestOptions({ headers: headers });
+    let headers = new Headers({
+     'Authorization': 'Bearer ' + token });
+    let options = new RequestOptions({ headers: headers });
 
-     console.log('pota ' + token);
-      let body = new FormData();
+    let body = new FormData();
       body.append('strDriverLicenseNumber', strDriverLicenseNumber);
       body.append('strRegistrationSticker', strRegistrationSticker);
       body.append('strPlateNumber', strPlateNumber);
@@ -260,25 +287,53 @@ export class ApiService {
       body.append('dblLongitude', dblLongitude);
       body.append('violations', violations);
 
-    return new Promise(resolve => {
-      this.http.post(domain + 'api/v1/driverviolations', body, options)
-        .map(res => res.json())
-        .subscribe(data => {
-          this.object = data;
-          resolve(this.object);
-        });
-    });
+    return this.http.post(domain + 'api/v1/driverviolations', body, options)
+        .map((response:Response) => response.json())
+        .catch(this.addTicketErrorHandler);
   } 
 
+  addTicketErrorHandler(error: Response)
+  {
+
+    return Observable.throw(error || "addTicketError");
+  }
+
+  // addDriver(token, strDriverLicense, strDriverFirstName, strDriverMiddleName, strDriverLastName,
+  //               intLicenseType, datLicenseExpiration, datDriverBirthday) {
+
+  //    let headers = new Headers({
+  //     'Authorization': 'Bearer ' + token });
+  //    let options = new RequestOptions({ headers: headers });
+
+  //     console.log('pota ' + token);
+  //     let body = new FormData();
+  //     body.append('strDriverLicense', strDriverLicense);
+  //     body.append('strDriverFirstName', strDriverFirstName);
+  //     body.append('strDriverMiddleName', strDriverMiddleName);
+  //     body.append('strDriverLastName', strDriverLastName);
+  //     body.append('intLicenseType', intLicenseType);
+  //     body.append('datLicenseExpiration', datLicenseExpiration);
+  //     body.append('datDriverBirthday', datDriverBirthday);
+
+  //   return new Promise(resolve => {
+  //     this.http.post(domain + 'api/v1/drivers', body, options)
+  //       .map(res => res.json())
+  //       .subscribe(data => {
+  //         this.object = data;
+  //         resolve(this.object);
+  //       });
+  //   });
+  // } 
+
   addDriver(token, strDriverLicense, strDriverFirstName, strDriverMiddleName, strDriverLastName,
-                intLicenseType, datLicenseExpiration, datDriverBirthday) {
+                intLicenseType, datLicenseExpiration, datDriverBirthday)
+  {
 
-     let headers = new Headers({
+    let headers = new Headers({
       'Authorization': 'Bearer ' + token });
-     let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers });
 
-      console.log('pota ' + token);
-      let body = new FormData();
+    let body = new FormData();
       body.append('strDriverLicense', strDriverLicense);
       body.append('strDriverFirstName', strDriverFirstName);
       body.append('strDriverMiddleName', strDriverMiddleName);
@@ -287,15 +342,16 @@ export class ApiService {
       body.append('datLicenseExpiration', datLicenseExpiration);
       body.append('datDriverBirthday', datDriverBirthday);
 
-    return new Promise(resolve => {
-      this.http.post(domain + 'api/v1/drivers', body, options)
-        .map(res => res.json())
-        .subscribe(data => {
-          this.object = data;
-          resolve(this.object);
-        });
-    });
+    return this.http.post(domain + 'api/v1/drivers', body, options)
+        .map((response:Response) => response.json())
+        .catch(this.addDriverErrorHandler);
   } 
+
+  addDriverErrorHandler(error: Response)
+  {
+
+    return Observable.throw(error || "addDriverError");
+  }
   
 
 

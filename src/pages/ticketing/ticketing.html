@@ -133,7 +133,7 @@
 </div>
 
 </ion-content>
-<ion-footer *ngIf="violationsSelectedObject!= null">
+<ion-footer *ngIf="violationsSelectedObject!= null && (violationsSelectedObject| json) != '[]'">
     <button ion-button full color="secondary" icon-left (click)="fileTicket(driverDetails.dblLongitude,driverDetails.dblLatitude,driverDetails.strDriverLicense,driverDetails.strDriverFirstName,driverDetails.strDriverMiddleName,driverDetails.strDriverLastName,driverDetails.datDriverBirthday,driverDetails.datLicenseExpiration,driverDetails.intLicenseType,vehicleInfo.strPlateNumber,vehicleInfo.strRegistrationNumber,vehicleInfo.intVehicleType,driverDetails.isExists)">
       <ion-icon name="done-all"></ion-icon>
       File Ticket

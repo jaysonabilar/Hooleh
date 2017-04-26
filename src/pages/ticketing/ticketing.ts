@@ -246,45 +246,97 @@ export class TicketingPage {
           handler: () => {
             if(isExists == '1')
             {
-              this.apiService.addTicket(this.loginDetails.token, strDriverLicense, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
-                      dblLatitude, dblLongitude, this.violationsObject)
-                .then(data => { 
-                  this.object= data;
-              });
+              this.fileTicketDriverExist(dblLongitude, dblLatitude, strDriverLicense, strDriverFirstName,strDriverMiddleName, strDriverLastName, 
+                datDriverBirthday, datLicenseExpiration,intLicenseType, strPlateNumber, strRegistrationSticker, intVehicleTypeID,isExists);
             }
             else
             {
-              this.apiService.addDriver(this.loginDetails.token, strDriverLicense, strDriverFirstName, strDriverMiddleName, strDriverLastName,
-                      intLicenseType, datLicenseExpiration, datDriverBirthday)
-                .then(data => { 
-                  this.object= data;
-              });
-
-               this.apiService.addTicket(this.loginDetails.token, strDriverLicense, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
-                      dblLatitude, dblLongitude, this.violationsObject)
-                .then(data => { 
-                  this.object= data;
-              });
+              this.fileTicketDriverNotxist(dblLongitude, dblLatitude, strDriverLicense, strDriverFirstName,strDriverMiddleName, strDriverLastName, 
+                datDriverBirthday, datLicenseExpiration,intLicenseType, strPlateNumber, strRegistrationSticker, intVehicleTypeID,isExists);
 
             }
 
-             window.localStorage.removeItem("selectedViolations");
-             window.localStorage.removeItem("sessionDriver");
-             this.navCtrl.setRoot(this.navCtrl.getActive().component);
-             this.insertTicketSuccessful();
+             
           }
         }
       ]
     });
-    alert.present();
+    alert.present();   
+  }
 
-    
-      
+  fileTicketDriverExist(dblLongitude, dblLatitude, strDriverLicense, strDriverFirstName,strDriverMiddleName, strDriverLastName, 
+    datDriverBirthday, datLicenseExpiration,intLicenseType, strPlateNumber, strRegistrationSticker, intVehicleTypeID,isExists)
+  {
+      this.apiService.addTicket(this.loginDetails.token, strDriverLicense, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
+          dblLatitude, dblLongitude, this.violationsObject)
+      .subscribe(data => 
+        {          
+          window.localStorage.removeItem("selectedViolations");
+          window.localStorage.removeItem("sessionDriver");
+          this.navCtrl.setRoot(this.navCtrl.getActive().component);
+          this.insertTicketSuccessful();
+        },
+        errormsg => 
+        {
+          this.error = errormsg;
+          if(this.error)
+           {
+                this.insertTicketFailed();
+           }
+        }
+        );
+
+  }
+
+  fileTicketDriverNotxist(dblLongitude, dblLatitude, strDriverLicense, strDriverFirstName,strDriverMiddleName, strDriverLastName, 
+    datDriverBirthday, datLicenseExpiration,intLicenseType, strPlateNumber, strRegistrationSticker, intVehicleTypeID,isExists)
+  {
+     
+       this.apiService.addDriver(this.loginDetails.token, strDriverLicense, strDriverFirstName, strDriverMiddleName, strDriverLastName,
+                intLicenseType, datLicenseExpiration, datDriverBirthday)
+      .subscribe(data => 
+        {          
+           this.apiService.addTicket(this.loginDetails.token, strDriverLicense, strRegistrationSticker, strPlateNumber, intVehicleTypeID,
+          dblLatitude, dblLongitude, this.violationsObject)
+            .subscribe(data => 
+              {          
+                window.localStorage.removeItem("selectedViolations");
+                window.localStorage.removeItem("sessionDriver");
+                this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                this.insertTicketSuccessful();
+              },
+              errormsg => 
+              {
+                this.error = errormsg;
+                if(this.error)
+                 {
+                      this.insertTicketFailed();
+                 }
+              }
+              );
+        },
+        errormsg => 
+        {
+          this.error = errormsg;
+          if(this.error)
+           {
+                this.insertTicketFailed();
+           }
+        }
+        );
   }
 
   insertTicketSuccessful() {
     let alert = this.alertCtrl.create({
       title: "New Ticket has been sucessfully added!",
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
+  insertTicketFailed() {
+    let alert = this.alertCtrl.create({
+      title: "Failed to insert ticket. All fields except middle name is required to have value!!",
       buttons: ['Ok']
     });
     alert.present();
