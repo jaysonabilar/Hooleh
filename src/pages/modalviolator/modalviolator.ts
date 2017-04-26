@@ -49,6 +49,7 @@ export class ModalviolatorPage {
 
   violatorObject:any;
 
+  violatorTab: string = "Profile";
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService) {
   	this.violator = this.navParams.get('violatorsTodayDetails');
     this.violatorObject = this.navParams.get('violatorsTodayDetails');

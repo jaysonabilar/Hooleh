@@ -22,7 +22,7 @@
   </ion-item>
 
     <div padding>
-      <ion-segment [(ngModel)]="violator">
+      <ion-segment [(ngModel)]="violatorTab">
         <ion-segment-button value="Profile">
           Profile
         </ion-segment-button>
@@ -32,10 +32,10 @@
       </ion-segment>
     </div>
 
-      <div [ngSwitch]="violator">
-        <ion-list *ngSwitchCase="'Profile'">
+      <div [ngSwitch]="violatorTab">
+        <ion-list *ngSwitchCase="'Profile'" ngSelected="selected">
           <ion-item>
-            <p>Full Name : </p><h2>{{violatorObject.strDriverLastname}} {{violatorObject.strDriverFirstname}}, {{violatorObject.strDriverMiddlename}}</h2>
+            <p>Full Name : </p><h2>{{violatorObject.strDriverLastname}}, {{violatorObject.strDriverFirstname}} {{violatorObject.strDriverMiddlename}}</h2>
           </ion-item>
            <ion-item>
             <p>BirthDate : </p><h2>{{violatorObject.datDriverBirthday}}</h2>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-// var domain = 'http://hooleh.herokuapp.com/';
+// var domain = 'http://localhost:8000/';
 var domain = 'http://hooleh.herokuapp.com/';
 /*
   Generated class for the ApiService provider.
