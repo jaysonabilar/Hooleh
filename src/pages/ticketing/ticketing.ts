@@ -79,6 +79,8 @@ export class TicketingPage {
   object:any;
 
 	ViolatorsProfile: string = "Personal";
+
+  error : string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService, public geolocation : Geolocation,
     private alertCtrl: AlertController) {
       this.loginDetailsObject = localStorage.getItem('loginDetails');
@@ -122,10 +124,10 @@ export class TicketingPage {
      
     console.log(strDriverLicense);
 
-    this.apiService.getSelectedDriver(this.loginDetails.token,strDriverLicense)
-      .then(
-        data => { 
-            console.log(data);
+     this.apiService.getSelectedDriver(this.loginDetails.token,strDriverLicense)
+    .subscribe(data => 
+      {
+          console.log(data);
           if(data.intDriverID){
             this.driverDetails.intDriverID = data.intDriverID;
            // this.driverDetails.strDriverLicense = data.strDriverLicense;
@@ -152,8 +154,25 @@ export class TicketingPage {
             this.driverDetails.isExists = '0';
             this.driverNotExist(strDriverLicense);
          }
+      },
+      errormsg => 
+      {
+        this.error = errormsg;
+        if(this.error)
+         {
+            console.log('wala');
+            this.driverDetails.strDriverFirstName = '';
+            this.driverDetails.strDriverMiddleName = '';
+            this.driverDetails.strDriverLastName = '';
+            this.driverDetails.intLicenseType = '';
+            this.driverDetails.datLicenseExpiration = '';
+            this.driverDetails.datDriverBirthday = '';
+            this.driverDetails.strLicenseType = '';
+            this.driverDetails.isExists = '0';
+            this.driverNotExist(strDriverLicense);
+         }
       }
-    );
+      );
   }
 
   driverNotExist(strDriverLicense) {

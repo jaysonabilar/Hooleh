@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers,RequestOptions} from '@angular/http';
+import { Http, Headers,RequestOptions,Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-// var domain = 'http://localhost:8000/';
+import 'rxjs/add/observable/throw';
+// var domain = 'http://hooleh.herokuapp.com/';
 var domain = 'http://hooleh.herokuapp.com/';
 /*
   Generated class for the ApiService provider.
@@ -20,32 +22,51 @@ export class ApiService {
 
 
 
+  // login(username,password) {
+  //   this.object;
+  //   if (this.object) {
+  //     return Promise.resolve(this.object);
+  //   }
+  //   // Dont have the data yet
+  //   // let headers = new Headers({'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
+
+  //   let body = new FormData();
+  //   body.append('username', username);
+  //   body.append('password', password);
+
+  //   return new Promise(resolve => {
+  //     this.http.post(domain + 'api/authenticate', body)
+  //       .map(res => res.json())
+  //       .subscribe(
+  //         data => {
+  //           this.object = data;
+  //           resolve(this.object);
+  //         },
+  //         error => {
+  //           console.log(JSON.stringify(error.json()));
+  //         }
+  //       );
+  //   });
+  // } 
+
+
   login(username,password) {
-    this.object;
-    if (this.object) {
-      return Promise.resolve(this.object);
-    }
-    // Dont have the data yet
-    // let headers = new Headers({'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
 
     let body = new FormData();
     body.append('username', username);
     body.append('password', password);
 
-    return new Promise(resolve => {
-      this.http.post(domain + 'api/authenticate', body)
-        .map(res => res.json())
-        .subscribe(
-          data => {
-            this.object = data;
-            resolve(this.object);
-          },
-          error => {
-            console.log(JSON.stringify(error.json()));
-          }
-        );
-    });
+    return this.http.post(domain + 'api/authenticate', body)
+        .map((response:Response) => response.json())
+        .catch(this.loginErrorHandler);
   } 
+
+  loginErrorHandler(error: Response)
+  {
+
+    return Observable.throw(error || "shit");
+  }
+
 
   logout(token) {
 
@@ -184,32 +205,42 @@ export class ApiService {
     });
   } 
 
+  // getSelectedDriver(token,licenseNumber) {
+  
+  //   let headers = new Headers({ 
+  //     'Authorization': 'Bearer ' + token });
+  //   let options = new RequestOptions({ headers: headers });
+
+  //   return new Promise(resolve => {
+  //     this.http.get(domain + 'api/v1/drivers/' + licenseNumber,options)
+  //       .map(res => res.json())
+  //       .subscribe(
+  //         data => {
+  //           object = data;
+  //           resolve(object);
+  //         },
+  //         err => {
+  //           console.log('driver not found.');
+  //         }
+  //       );
+  //   });
+  // } 
+
   getSelectedDriver(token,licenseNumber) {
-    console.log('this' + token);
-    var object;
-    if (this.object) {
-       console.log('jelo');
-      return Promise.resolve(this.object);
-    }
 
-    let headers = new Headers({ 
-      'Authorization': 'Bearer ' + token });
-    let options = new RequestOptions({ headers: headers });
+   let headers = new Headers({ 
+       'Authorization': 'Bearer ' + token});
+   let options = new RequestOptions({ headers: headers });
 
-    return new Promise(resolve => {
-      this.http.get(domain + 'api/v1/drivers/' + licenseNumber,options)
-        .map(res => res.json())
-        .subscribe(
-          data => {
-            object = data;
-            resolve(object);
-          },
-          err => {
-            console.log('driver not found.');
-          }
-        );
-    });
+    return this.http.get(domain + 'api/v1/drivers/' + licenseNumber,options)
+        .map((response:Response) => response.json())
+        .catch(this.getSelectedDriverErrorHandler);
   } 
+
+  getSelectedDriverErrorHandler(error: Response)
+  {
+    return Observable.throw(error || "getSelectedDriverError");
+  }
 
 
   addTicket(token, strDriverLicenseNumber, strRegistrationSticker, strPlateNumber, intVehicleTypeID,

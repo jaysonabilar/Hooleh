@@ -48,6 +48,8 @@ export class HomePage {
 
   searchedDriverLicense:'';
 
+  
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation : Geolocation, public apiService: ApiService,
     private alertCtrl: AlertController) {
 

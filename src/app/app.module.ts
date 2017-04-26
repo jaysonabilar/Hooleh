@@ -2,7 +2,6 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { TicketPage } from '../pages/ticket/ticket';
 import { LoginPage } from '../pages/login/login';
 import { ModalviolatorPage } from '../pages/modalviolator/modalviolator';
 import { ViolationsPage} from '../pages/violations/violations';
@@ -16,7 +15,6 @@ import { TicketingPage } from '../pages/ticketing/ticketing';
   declarations: [
     MyApp,
     HomePage,
-    TicketPage,
     LoginPage,
     ModalviolatorPage,
     ViolationsPage,
@@ -29,7 +27,6 @@ import { TicketingPage } from '../pages/ticketing/ticketing';
   entryComponents: [
     MyApp,
     HomePage,
-    TicketPage,
     LoginPage,
     ModalviolatorPage,
     ViolationsPage,

@@ -60,7 +60,7 @@ export class ViolationsPage {
       .then(data => { 
         this.violationsObject = data;
      });
-      console.log(this.violationsObject);
+      console.log('wewe' + this.violationsObject);
     // this.enforcerDetails = JSON.parse(this.enforcerDetailsObject);
      
 

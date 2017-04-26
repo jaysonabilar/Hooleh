@@ -20,6 +20,7 @@ export class LoginPage {
   	password: '',
   };
 
+  error : string;
   token : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiService: ApiService,private alertCtrl: AlertController) {
@@ -34,34 +35,38 @@ export class LoginPage {
   loginUser(username, password){
     
     this.apiService.login(username,password)
-      .then(
-        data => { 
-        console.log(data);
+    .subscribe(data => 
+      {
         this.token = data.token;
+        console.log('tok');
 
-        var loginDetails = { 
-          'username': username, 
-          'password': password, 
-          'token': this.token
+         var loginDetails = { 
+        'username': username, 
+        'password': password, 
+        'token': this.token
         };
 
-        window.localStorage.removeItem("selectedViolations");
-        window.localStorage.removeItem("sessionDriver");
-        window.localStorage.setItem('loginDetails', JSON.stringify(loginDetails));
+         window.localStorage.removeItem("selectedViolations");
+         window.localStorage.removeItem("sessionDriver");
+         window.localStorage.setItem('loginDetails', JSON.stringify(loginDetails));
 
-        if(this.token.length > 1){
-           this.loginSuccessful();
-           this.navCtrl.setRoot(HomePage);
-        }
-        else{
-           this.loginFailed();
-        }
-
+         console.log(this.error);
+         if(this.token.length > 1){
+            this.loginSuccessful();
+             this.navCtrl.setRoot(HomePage);
+         }
+      },
+      errormsg => 
+      {
+        this.error = errormsg;
+        if(this.error)
+         {
+              this.loginFailed();
+         }
       }
-    );
-  
-    
-      
+      );
+
+
   }
 
   loginSuccessful() {
